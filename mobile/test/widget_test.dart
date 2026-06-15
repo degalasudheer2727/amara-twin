@@ -16,7 +16,14 @@ void main() {
   });
 
   testWidgets('Home screen renders headline and KPIs', (tester) async {
-    await tester.pumpWidget(const MaterialApp(home: Scaffold(body: HomeScreen(repo: repo))));
+    // The home screen is a lazy CustomScrollView; give the test a tall surface
+    // so every sliver (headline, KPIs, pillars) is laid out and findable.
+    tester.view.physicalSize = const Size(1200, 3200);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(
+        const MaterialApp(home: Scaffold(body: HomeScreen(repo: repo))));
     expect(find.textContaining('Capital'), findsWidgets);
     expect(find.textContaining('national-grade'), findsOneWidget);
   });

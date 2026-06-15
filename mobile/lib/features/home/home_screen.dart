@@ -28,14 +28,19 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(children: [
-                  const Text('Live Twin · Amaravati',
-                      style: TextStyle(color: AppColors.saffron, fontSize: 11, letterSpacing: 2.2, fontWeight: FontWeight.w600)),
-                  const Spacer(),
-                  const LivePill(),
+                const Row(children: [
+                  Text('Live Twin · Amaravati',
+                      style: TextStyle(
+                          color: AppColors.saffron,
+                          fontSize: 11,
+                          letterSpacing: 2.2,
+                          fontWeight: FontWeight.w600)),
+                  Spacer(),
+                  LivePill(),
                 ]),
                 const SizedBox(height: 14),
-                Text('The People’s Capital,\nin your pocket.', style: AppTheme.display(30)),
+                Text('The People’s Capital,\nin your pocket.',
+                    style: AppTheme.display(30)),
                 const SizedBox(height: 8),
                 Text('అమరావతి', style: AppTheme.telugu(16)),
                 const SizedBox(height: 14),
@@ -53,7 +58,10 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(20, 4, 20, 8),
           sliver: SliverGrid(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 1.7),
+                crossAxisCount: 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                childAspectRatio: 1.7),
             delegate: SliverChildBuilderDelegate(
               (_, i) {
                 final k = kpis[i];
@@ -63,13 +71,22 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      RichText(text: TextSpan(children: [
-                        TextSpan(text: k.value, style: AppTheme.display(28, color: AppColors.gold)),
-                        TextSpan(text: k.unit, style: AppTheme.display(15, color: AppColors.saffron)),
+                      RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                            text: k.value,
+                            style: AppTheme.display(28, color: AppColors.gold)),
+                        TextSpan(
+                            text: k.unit,
+                            style:
+                                AppTheme.display(15, color: AppColors.saffron)),
                       ])),
                       const SizedBox(height: 6),
                       Text(k.label.toUpperCase(),
-                          style: const TextStyle(color: AppColors.muted, fontSize: 10, letterSpacing: 0.6)),
+                          style: const TextStyle(
+                              color: AppColors.muted,
+                              fontSize: 10,
+                              letterSpacing: 0.6)),
                     ],
                   ),
                 );
@@ -80,15 +97,16 @@ class HomeScreen extends StatelessWidget {
         ),
 
         // Live signals
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
-            child: const SectionHeader(kicker: 'Live signals', title: 'The city, right now'),
+            padding: EdgeInsets.fromLTRB(20, 16, 20, 8),
+            child: SectionHeader(
+                kicker: 'Live signals', title: 'The city, right now'),
           ),
         ),
         SliverToBoxAdapter(
           child: SizedBox(
-            height: 96,
+            height: 104,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -102,14 +120,22 @@ class HomeScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.surface,
                     borderRadius: BorderRadius.circular(14),
-                    border: const Border.fromBorderSide(BorderSide(color: AppColors.line)),
+                    border: const Border.fromBorderSide(
+                        BorderSide(color: AppColors.line)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(s.label, style: const TextStyle(color: AppColors.muted, fontSize: 11)),
-                      Text(s.value, style: AppTheme.display(18, color: AppColors.text)),
+                      Text(s.label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              color: AppColors.muted, fontSize: 11)),
+                      Text(s.value,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTheme.display(18, color: AppColors.text)),
                     ],
                   ),
                 );
@@ -119,13 +145,14 @@ class HomeScreen extends StatelessWidget {
         ),
 
         // Pillars
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
-            child: const SectionHeader(
+            padding: EdgeInsets.fromLTRB(20, 24, 20, 8),
+            child: SectionHeader(
                 kicker: 'The four pillars',
                 title: 'A national-grade nexus',
-                subtitle: 'Turning a master plan into a public, governed, intelligent data utility.'),
+                subtitle:
+                    'Turning a master plan into a public, governed, intelligent data utility.'),
           ),
         ),
         SliverPadding(
@@ -141,14 +168,24 @@ class HomeScreen extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(p.number, style: AppTheme.display(26, color: p.accent)),
+                        Text(p.number,
+                            style: AppTheme.display(26, color: p.accent)),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                            Text(p.title, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
-                            const SizedBox(height: 4),
-                            Text(p.description, style: const TextStyle(color: AppColors.muted, fontSize: 13, height: 1.45)),
-                          ]),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(p.title,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 15)),
+                                const SizedBox(height: 4),
+                                Text(p.description,
+                                    style: const TextStyle(
+                                        color: AppColors.muted,
+                                        fontSize: 13,
+                                        height: 1.45)),
+                              ]),
                         ),
                       ],
                     ),

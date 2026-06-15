@@ -55,5 +55,9 @@ jobs:
         run: flutter analyze
       - name: Unit & widget tests
         run: flutter test --coverage
+      - name: Generate web platform scaffolding
+        # The repo tracks only lib/ + test/ (no platform folders). Generate the
+        # web target on the fly so the smoke build has something to compile.
+        run: flutter create --platforms=web --project-name amara_twin .
       - name: Build web (smoke build)
         run: flutter build web --release
