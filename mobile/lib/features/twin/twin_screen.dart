@@ -41,7 +41,8 @@ class _TwinScreenState extends State<TwinScreen> {
           color: AppColors.bg,
           alignment: Alignment.center,
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            Text('AMARATWIN', style: AppTheme.display(20, color: AppColors.gold)),
+            Text('AMARATWIN',
+                style: AppTheme.display(20, color: AppColors.gold)),
             const SizedBox(height: 14),
             SizedBox(
               width: 180,
@@ -57,11 +58,13 @@ class _TwinScreenState extends State<TwinScreen> {
             ),
             const SizedBox(height: 12),
             const Text('Compiling the digital twin…',
-                style: TextStyle(color: AppColors.muted2, fontSize: 11, letterSpacing: 2)),
+                style: TextStyle(
+                    color: AppColors.muted2, fontSize: 11, letterSpacing: 2)),
           ]),
         ),
       Positioned(
-        top: 50, right: 16,
+        top: 50,
+        right: 16,
         child: FloatingActionButton.small(
           heroTag: 'reloadTwin',
           backgroundColor: AppColors.surfaceHi,

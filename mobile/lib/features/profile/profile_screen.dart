@@ -23,13 +23,16 @@ class ProfileScreen extends StatelessWidget {
         GlassCard(
           accent: AppColors.saffron,
           child: Row(children: [
-            const CircleAvatar(radius: 26, backgroundColor: AppColors.surfaceHi,
+            const CircleAvatar(
+                radius: 26,
+                backgroundColor: AppColors.surfaceHi,
                 child: Icon(Icons.person, color: AppColors.gold)),
             const SizedBox(width: 14),
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text('Citizen', style: AppTheme.display(18)),
               const SizedBox(height: 2),
-              const Text('Decentralised Digital ID · verified', style: TextStyle(color: AppColors.muted, fontSize: 12)),
+              const Text('Decentralised Digital ID · verified',
+                  style: TextStyle(color: AppColors.muted, fontSize: 12)),
             ]),
           ]),
         ),
@@ -38,14 +41,19 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10),
               child: GlassCard(
                 accent: AppColors.line,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                 child: Row(children: [
                   Icon(r.$1, size: 20, color: AppColors.muted),
                   const SizedBox(width: 14),
-                  Expanded(child: Text(r.$2, style: const TextStyle(fontSize: 14))),
-                  Text(r.$3, style: const TextStyle(color: AppColors.muted2, fontSize: 12)),
+                  Expanded(
+                      child: Text(r.$2, style: const TextStyle(fontSize: 14))),
+                  Text(r.$3,
+                      style: const TextStyle(
+                          color: AppColors.muted2, fontSize: 12)),
                   const SizedBox(width: 6),
-                  const Icon(Icons.chevron_right, size: 18, color: AppColors.muted2),
+                  const Icon(Icons.chevron_right,
+                      size: 18, color: AppColors.muted2),
                 ]),
               ),
             )),

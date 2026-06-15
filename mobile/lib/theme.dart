@@ -64,9 +64,15 @@ class AppTheme {
   }
 
   /// Serif display style used for big headlines (echoes the website's Georgia).
-  static TextStyle display(double size, {Color? color, FontWeight w = FontWeight.w400}) =>
-      GoogleFonts.notoSerif(fontSize: size, color: color ?? AppColors.text, fontWeight: w, height: 1.05);
+  static TextStyle display(double size,
+          {Color? color, FontWeight w = FontWeight.w400}) =>
+      GoogleFonts.notoSerif(
+          fontSize: size,
+          color: color ?? AppColors.text,
+          fontWeight: w,
+          height: 1.05);
 
   static TextStyle telugu(double size, {Color? color}) =>
-      GoogleFonts.notoSansTelugu(fontSize: size, color: color ?? AppColors.saffron);
+      GoogleFonts.notoSansTelugu(
+          fontSize: size, color: color ?? AppColors.saffron);
 }

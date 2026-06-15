@@ -2,6 +2,11 @@ name: Deploy (Vercel)
 
 # Automated deployment. PRs get an ephemeral preview URL; merges to main ship
 # to production. Gated behind CI + DevSecOps so nothing insecure reaches prod.
+#
+# Seamless-by-default: if the Vercel secrets are not configured yet, the deploy
+# is skipped cleanly (green, neutral) instead of failing the pipeline. Run
+# ./scripts/bootstrap.sh — or set VERCEL_TOKEN / VERCEL_ORG_ID / VERCEL_PROJECT_ID
+# in repo secrets — to switch live deploys on.
 
 on:
   push:
@@ -18,16 +23,33 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  gate:
-    name: Wait for CI + Security
+  # Detect whether deployment credentials exist. Secrets can't be read inside a
+  # job-level `if:`, so we surface their presence as an output other jobs gate on.
+  preflight:
+    name: Check deploy credentials
     runs-on: ubuntu-latest
+    outputs:
+      configured: ${{ steps.check.outputs.configured }}
     steps:
-      - run: echo "Deploy proceeds only after required CI & DevSecOps checks pass (enforced via branch protection)."
+      - id: check
+        run: |
+          if [ -n "${{ secrets.VERCEL_TOKEN }}" ] && [ -n "${{ secrets.VERCEL_ORG_ID }}" ] && [ -n "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+            echo "✅ Vercel credentials present — deployment will run."
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "ℹ️ Vercel secrets not set — skipping deploy. Add VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID (or run scripts/bootstrap.sh) to enable."
+          fi
 
   deploy:
     name: Deploy to Vercel
-    needs: gate
+    needs: preflight
+    if: needs.preflight.outputs.configured == 'true'
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }}

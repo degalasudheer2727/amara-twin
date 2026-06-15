@@ -46,12 +46,30 @@ class _RootNavState extends State<RootNav> {
           selectedIndex: _index,
           onDestinationSelected: (i) => setState(() => _index = i),
           destinations: const [
-            NavigationDestination(icon: Icon(Icons.dashboard_outlined), selectedIcon: Icon(Icons.dashboard), label: 'Home'),
-            NavigationDestination(icon: Icon(Icons.hub_outlined), selectedIcon: Icon(Icons.hub), label: 'Data'),
-            NavigationDestination(icon: Icon(Icons.view_in_ar_outlined), selectedIcon: Icon(Icons.view_in_ar), label: 'Twin'),
-            NavigationDestination(icon: Icon(Icons.location_city_outlined), selectedIcon: Icon(Icons.location_city), label: 'Cities'),
-            NavigationDestination(icon: Icon(Icons.rocket_launch_outlined), selectedIcon: Icon(Icons.rocket_launch), label: 'Futures'),
-            NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: 'You'),
+            NavigationDestination(
+                icon: Icon(Icons.dashboard_outlined),
+                selectedIcon: Icon(Icons.dashboard),
+                label: 'Home'),
+            NavigationDestination(
+                icon: Icon(Icons.hub_outlined),
+                selectedIcon: Icon(Icons.hub),
+                label: 'Data'),
+            NavigationDestination(
+                icon: Icon(Icons.view_in_ar_outlined),
+                selectedIcon: Icon(Icons.view_in_ar),
+                label: 'Twin'),
+            NavigationDestination(
+                icon: Icon(Icons.location_city_outlined),
+                selectedIcon: Icon(Icons.location_city),
+                label: 'Cities'),
+            NavigationDestination(
+                icon: Icon(Icons.rocket_launch_outlined),
+                selectedIcon: Icon(Icons.rocket_launch),
+                label: 'Futures'),
+            NavigationDestination(
+                icon: Icon(Icons.person_outline),
+                selectedIcon: Icon(Icons.person),
+                label: 'You'),
           ],
         ),
       ),

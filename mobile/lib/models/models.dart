@@ -48,7 +48,8 @@ class ThemeCity {
   final String description;
   final Color color;
   final int datasets;
-  const ThemeCity(this.title, this.telugu, this.description, this.color, this.datasets);
+  const ThemeCity(
+      this.title, this.telugu, this.description, this.color, this.datasets);
 }
 
 @immutable
