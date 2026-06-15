@@ -1,0 +1,21 @@
+{
+  "name": "amara-twin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AMARATWIN — concept digital-twin & open-data nexus for Amaravati. Super-rich 3D website + Flutter hybrid app.",
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 5173 --directory web",
+    "lint": "htmlhint \"web/**/*.html\"",
+    "validate": "node -e \"['vercel.json','web/manifest.webmanifest'].forEach(f=>JSON.parse(require('fs').readFileSync(f,'utf8')))\" && echo ok",
+    "sbom": "cdxgen -o sbom.json .",
+    "preview": "vercel deploy",
+    "deploy": "vercel deploy --prod"
+  },
+  "keywords": ["amaravati", "digital-twin", "open-data", "threejs", "flutter", "vercel", "devsecops"],
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "htmlhint": "^1.1.4"
+  },
+  "engines": { "node": ">=18" }
+}

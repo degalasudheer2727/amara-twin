@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://amara-twin.vercel.app/sitemap.xml

@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web:
+    name: Web · lint & validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate HTML
+        run: npx --yes htmlhint "web/**/*.html"
+      - name: Check JSON configs are well-formed
+        run: |
+          for f in vercel.json web/manifest.webmanifest; do
+            node -e "JSON.parse(require('fs').readFileSync('$f','utf8')); console.log('ok: $f')"
+          done
+      - name: Lighthouse CI (performance budget)
+        run: |
+          npm install -g @lhci/cli@0.13.x
+          lhci autorun --collect.staticDistDir=web --upload.target=temporary-public-storage || echo "LHCI advisory only"
+        continue-on-error: true
+
+  mobile:
+    name: Mobile · analyze & test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - name: Format check
+        run: dart format --output=none --set-exit-if-changed .
+      - name: Static analysis
+        run: flutter analyze
+      - name: Unit & widget tests
+        run: flutter test --coverage
+      - name: Build web (smoke build)
+        run: flutter build web --release

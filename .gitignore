@@ -1,0 +1,18 @@
+# Node
+node_modules/
+npm-debug.log*
+# Vercel
+.vercel/
+# DevSecOps artefacts
+sbom.json
+*.sarif
+trivy.sarif
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+# Build output
+dist/
+mobile/build/
