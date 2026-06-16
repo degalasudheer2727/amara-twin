@@ -299,6 +299,52 @@
   .persona p{font-size:.84rem;color:var(--muted);margin-bottom:12px}
   .persona .clr{display:flex;flex-wrap:wrap;gap:6px}
 
+  /* ---------- data exchange hub ---------- */
+  .exflow{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,5vw,56px);display:grid;grid-template-columns:repeat(6,1fr);gap:0}
+  @media(max-width:980px){.exflow{grid-template-columns:repeat(3,1fr);gap:10px}}
+  @media(max-width:560px){.exflow{grid-template-columns:1fr}}
+  .estep{position:relative;padding:22px 20px;border:1px solid var(--line-soft);background:var(--surface)}
+  .exflow .estep:first-child{border-radius:12px 0 0 12px}
+  .exflow .estep:last-child{border-radius:0 12px 12px 0}
+  @media(max-width:980px){.exflow .estep,.exflow .estep:first-child,.exflow .estep:last-child{border-radius:12px}}
+  .estep .en{font-family:var(--display);font-size:1.2rem;color:var(--gold);margin-bottom:10px}
+  .estep h4{font-size:.98rem;margin-bottom:7px}
+  .estep p{font-size:.78rem;color:var(--muted);line-height:1.45}
+  .estep.gov{border-color:var(--gold);background:linear-gradient(180deg,rgba(231,196,107,.07),var(--surface))}
+  .estep.gov::after{content:"CRDA";position:absolute;top:12px;right:12px;font-size:8px;letter-spacing:.14em;color:var(--gold);border:1px solid var(--line);border-radius:10px;padding:2px 7px}
+  .estep .ar{position:absolute;right:-10px;top:50%;transform:translateY(-50%);z-index:4;color:var(--gold);font-size:16px;background:var(--bg-3);width:20px;text-align:center}
+  @media(max-width:980px){.estep .ar{display:none}}
+
+  .entities{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fill,minmax(186px,1fr));gap:12px}
+  .entity{position:relative;padding:18px 18px 20px;border:1px solid var(--line-soft);border-radius:13px;background:var(--surface);transition:border-color .2s,transform .2s}
+  .entity:hover{border-color:var(--ec,var(--gold));transform:translateY(-3px)}
+  .entity.gov{border-color:var(--gold);background:linear-gradient(180deg,rgba(231,196,107,.08),var(--surface))}
+  .entity .ab{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px}
+  .entity .ab .ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:17px;background:rgba(255,255,255,.04);border:1px solid var(--line-soft)}
+  .entity .ab b{font-family:var(--display);font-size:1rem;color:var(--ec,var(--text))}
+  .entity h4{font-size:.9rem;font-weight:600;margin-bottom:4px;line-height:1.25}
+  .entity .role{font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted-2);margin-bottom:12px}
+  .entity .io{display:flex;gap:14px;border-top:1px solid var(--line-soft);padding-top:10px}
+  .entity .io div{font-size:10.5px;color:var(--muted)}
+  .entity .io b{display:block;font-family:var(--display);font-size:1.05rem;color:var(--text)}
+  .entity .crda-tag{position:absolute;top:14px;right:14px;font-size:8px;letter-spacing:.14em;color:var(--gold);border:1px solid var(--line);border-radius:10px;padding:2px 7px}
+
+  .ledger-wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,5vw,56px);overflow-x:auto}
+  table.ledger{width:100%;border-collapse:collapse;min-width:720px;font-size:12.5px}
+  table.ledger th,table.ledger td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+  table.ledger thead th{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  table.ledger tbody tr:hover{background:rgba(255,255,255,.02)}
+  table.ledger .flow{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+  table.ledger .flow b{font-weight:600;color:var(--text)}
+  table.ledger .flow .ar{color:var(--gold)}
+  table.ledger .dsn{color:var(--text)}
+  .stat{display:inline-flex;align-items:center;gap:6px;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:20px;border:1px solid currentColor;white-space:nowrap}
+  .stat i{width:6px;height:6px;border-radius:50%;background:currentColor}
+  .stat.active{color:#5ad17a}
+  .stat.review{color:var(--gold)}
+  .stat.agreement{color:var(--pulse)}
+  .stat.denied{color:#ff7a7a}
+
   /* ---------- onboarding modal ---------- */
   .ov{position:fixed;inset:0;z-index:300;background:rgba(3,5,12,.74);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
   .ov.on{display:flex}
@@ -371,7 +417,7 @@
   </a>
   <div class="navlinks">
     <a href="#catalogue">Catalogue</a>
-    <a href="#connectors">Connectors</a>
+    <a href="#exchange">Exchange Hub</a>
     <a href="#access">Access &amp; Roles</a>
     <a href="#cities">Theme Cities</a>
     <div class="auth">
@@ -472,6 +518,33 @@
     <p>How each persona meets each tier — instant, on agreement, or closed. The same matrix governs the catalogue above and the request flow.</p>
   </div>
   <div class="matrix-wrap reveal"><table class="matrix" id="matrix"></table></div>
+</section>
+
+<!-- DATA EXCHANGE HUB -->
+<section class="content alt" id="exchange">
+  <div class="sec-head reveal">
+    <span class="kicker">Data Exchange Hub · governed by CRDA</span>
+    <h2>Government data, <em>exchanged under governance.</em></h2>
+    <p>The hard part of open data isn't publishing — it's the governed exchange of sensitive data <em>between</em> agencies. data.amaravati gives every government entity one place to request and provide data, with <b>CRDA as the governing authority</b>: classifying data, approving restricted exchanges, holding the register of agreements and auditing every transaction. Modelled on mature city data-exchange platforms.</p>
+  </div>
+  <div class="exflow reveal" id="exflow"></div>
+
+  <div class="sec-head reveal" style="margin-top:68px">
+    <span class="kicker">Participating entities</span>
+    <h2>A network of <em>providers &amp; consumers.</em></h2>
+    <p>Departments, utilities and statutory bodies join the hub as data providers, consumers or both — with CRDA presiding over the network.</p>
+  </div>
+  <div class="entities reveal" id="entities-grid"></div>
+
+  <div class="sec-head reveal" style="margin-top:68px">
+    <span class="kicker">The exchange register</span>
+    <h2>Live inter-agency <em>agreements.</em></h2>
+    <p>Every government-to-government exchange, its confidentiality class and where it sits in CRDA governance — open, under review, on agreement, or declined.</p>
+  </div>
+  <div class="ledger-wrap reveal"><table class="ledger" id="ledger"></table></div>
+  <div class="reveal" style="text-align:center;margin-top:36px;padding:0 clamp(18px,5vw,56px)">
+    <a href="#" class="btn btn-primary" id="proposeBtn">Propose an exchange ↗</a>
+  </div>
 </section>
 
 <!-- CITIES -->
@@ -682,6 +755,42 @@ const DATASET_DATA=[
   {ent:"Safety",cls:"confidential",t:"Command Centre Incident Feeds",d:"Live CCTV-linked incident and surveillance feeds.",fmt:"—",cad:"—",owner:"Police"},
 ];
 
+/* ---- data exchange hub: entities, governance workflow, register ---- */
+const ENTITY_DATA=[
+  {abbr:"APCRDA",name:"Capital Region Dev. Authority",role:"Governing authority",ic:"🏛️",pub:9,con:5,c:"var(--gold)",gov:true},
+  {abbr:"DTCP",name:"Town &amp; Country Planning",role:"Provider · Consumer",ic:"📐",pub:3,con:2,c:"var(--saffron)"},
+  {abbr:"Irrigation",name:"Water Resources Dept",role:"Provider",ic:"💧",pub:2,con:1,c:"#3aa0ff"},
+  {abbr:"APSRTC",name:"Road Transport Corp.",role:"Provider · Consumer",ic:"🚌",pub:2,con:2,c:"var(--pulse)"},
+  {abbr:"APPCB",name:"Pollution Control Board",role:"Provider",ic:"🌿",pub:2,con:1,c:"#5ad17a"},
+  {abbr:"AP Police",name:"Police &amp; Command Centre",role:"Provider · Consumer",ic:"🛡️",pub:2,con:3,c:"#ff5f6d"},
+  {abbr:"Reg. &amp; Stamps",name:"Registration &amp; Stamps",role:"Provider",ic:"🧾",pub:1,con:1,c:"#c98bff"},
+  {abbr:"AP EDB",name:"Economic Development Board",role:"Consumer",ic:"📈",pub:1,con:4,c:"var(--green)"},
+  {abbr:"DES",name:"Economics &amp; Statistics",role:"Provider · Consumer",ic:"📊",pub:3,con:3,c:"#ffb347"},
+  {abbr:"Transport",name:"Transport Department",role:"Provider · Consumer",ic:"🚦",pub:2,con:2,c:"var(--pulse)"},
+  {abbr:"Water Utility",name:"City Water Utility",role:"Provider",ic:"🚰",pub:1,con:2,c:"var(--cyan)"},
+  {abbr:"ULBs",name:"Urban Local Bodies",role:"Consumer",ic:"🏙️",pub:1,con:5,c:"var(--saffron)"},
+];
+const EXFLOW_DATA=[
+  {n:"01",t:"Request",d:"A consumer entity requests a dataset from a provider through the hub."},
+  {n:"02",t:"Classify &amp; route",d:"The hub tags the data's confidentiality tier and routes it by policy."},
+  {n:"03",t:"CRDA review",d:"CRDA verifies purpose, legal basis and DPDP / consent compliance.",gov:true},
+  {n:"04",t:"Agreement",d:"A signed, time-boxed, consent-bound data-sharing agreement is registered.",gov:true},
+  {n:"05",t:"Provision",d:"A secure API / exchange channel is opened between the two entities."},
+  {n:"06",t:"Audit",d:"Every transaction is logged; CRDA monitors and can revoke access.",gov:true},
+];
+const EXSTATUS={active:{t:"Active",c:"active"},review:{t:"CRDA review",c:"review"},agreement:{t:"Agreement",c:"agreement"},denied:{t:"Declined",c:"denied"}};
+const EXCHANGE_DATA=[
+  {prov:"DTCP",con:"APCRDA",ds:"Layout &amp; Plot Sanctions",cls:"internal",status:"active",purpose:"Master-plan compliance"},
+  {prov:"Irrigation",con:"APCRDA",ds:"Krishna Riverfront Levels",cls:"public",status:"active",purpose:"Flood resilience"},
+  {prov:"AP Police",con:"Transport",ds:"ANPR Vehicle Movements",cls:"restricted",status:"review",purpose:"Corridor congestion modelling"},
+  {prov:"Reg. &amp; Stamps",con:"AP EDB",ds:"Property Registration Prices",cls:"restricted",status:"agreement",purpose:"Land-value baselining"},
+  {prov:"APPCB",con:"ULBs",ds:"Air Quality Index",cls:"public",status:"active",purpose:"Ward health dashboards"},
+  {prov:"DES",con:"APCRDA",ds:"Ward Population &amp; Density",cls:"public",status:"active",purpose:"Service planning"},
+  {prov:"APCRDA",con:"AP Police",ds:"Individual Land-Loser Records",cls:"confidential",status:"denied",purpose:"Identity verification"},
+  {prov:"Water Utility",con:"APCRDA",ds:"Reservoir &amp; Supply (SCADA)",cls:"restricted",status:"agreement",purpose:"Demand forecasting"},
+  {prov:"APSRTC",con:"Transport",ds:"Public Transit Positions",cls:"public",status:"active",purpose:"Multimodal routing"},
+];
+
 /* ============== BUILD UI ============== */
 const $=s=>document.querySelector(s);
 KPI_DATA.forEach(k=>$("#kpis").insertAdjacentHTML("beforeend",
@@ -717,6 +826,17 @@ PERSONA_DATA.forEach(p=>{
   $("#matrix").innerHTML=head+body;
 })();
 
+/* ---- data exchange hub ---- */
+EXFLOW_DATA.forEach((s,i)=>$("#exflow").insertAdjacentHTML("beforeend",
+  `<div class="estep${s.gov?' gov':''}"><div class="en">${s.n}</div><h4>${s.t}</h4><p>${s.d}</p>${i<EXFLOW_DATA.length-1?'<div class="ar">→</div>':''}</div>`));
+ENTITY_DATA.forEach(e=>$("#entities-grid").insertAdjacentHTML("beforeend",
+  `<div class="entity${e.gov?' gov':''}" style="--ec:${e.c}">${e.gov?'<span class="crda-tag">GOVERNS</span>':''}<div class="ab"><span class="ic">${e.ic}</span><b>${e.abbr}</b></div><h4>${e.name}</h4><div class="role">${e.role}</div><div class="io"><div><b>${e.pub}</b>Published</div><div><b>${e.con}</b>Consumed</div></div></div>`));
+(function(){
+  const head=`<thead><tr><th>Exchange</th><th>Dataset</th><th>Class</th><th>Purpose</th><th>Status</th></tr></thead>`;
+  const body=`<tbody>${EXCHANGE_DATA.map(x=>{const st=EXSTATUS[x.status];const c=CLS[x.cls];return `<tr><td><span class="flow"><b>${x.prov}</b> <span class="ar">→</span> <b>${x.con}</b></span></td><td class="dsn">${x.ds}</td><td><span class="cls ${x.cls}"><i></i>${c.t}</span></td><td style="color:var(--muted)">${x.purpose}</td><td><span class="stat ${st.c}"><i></i>${st.t}</span></td></tr>`}).join("")}</tbody>`;
+  $("#ledger").innerHTML=head+body;
+})();
+
 /* ============== ONBOARDING · GOOGLE SSO ============== */
 /* Drop your Google Cloud OAuth 2.0 Client ID here to switch real Gmail sign-in on.
    Create one at console.cloud.google.com → APIs & Services → Credentials → OAuth client (Web),
@@ -726,6 +846,7 @@ const realClientId = () => GOOGLE_CLIENT_ID && !/^YOUR_/.test(GOOGLE_CLIENT_ID);
 
 let SESSION = (()=>{try{return JSON.parse(localStorage.getItem("dav_session"))||null}catch(e){return null}})();
 let pendingDataset = null;
+let exchangeMode = false;
 
 const ov=$("#ov"), modalBody=$("#modalBody");
 function persistSession(){SESSION?localStorage.setItem("dav_session",JSON.stringify(SESSION)):localStorage.removeItem("dav_session");renderAuth();buildCatalogue(activeFilter);}
@@ -756,8 +877,9 @@ function afterSignIn(profile){
 }
 
 /* ---- modal flow ---- */
-function openFlow(dataset){pendingDataset=dataset||null; ov.classList.add("on"); ov.setAttribute("aria-hidden","false"); renderModal(SESSION? (dataset?"request":"persona") : "signin");}
-function closeModal(){ov.classList.remove("on");ov.setAttribute("aria-hidden","true");pendingDataset=null;}
+function openFlow(dataset){exchangeMode=false;pendingDataset=dataset||null; ov.classList.add("on"); ov.setAttribute("aria-hidden","false"); renderModal(SESSION? (dataset?"request":"persona") : "signin");}
+function openExchange(){exchangeMode=true;pendingDataset=null; ov.classList.add("on"); ov.setAttribute("aria-hidden","false"); renderModal(SESSION?"exchange":"signin");}
+function closeModal(){ov.classList.remove("on");ov.setAttribute("aria-hidden","true");pendingDataset=null;exchangeMode=false;}
 
 const seal=`<svg class="seal" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="#e7c46b" stroke-width="2.5"/><circle cx="50" cy="50" r="6" fill="#ff9933"/><g stroke="#3b7bff" stroke-width="2"><line x1="50" y1="8" x2="50" y2="92"/><line x1="8" y1="50" x2="92" y2="50"/><line x1="21" y1="21" x2="79" y2="79"/><line x1="79" y1="21" x2="21" y2="79"/></g></svg>`;
 const steps=(n)=>`<div class="steps">${[1,2,3].map(i=>`<span class="st ${i<=n?'on':''}"></span>`).join("")}</div>`;
@@ -784,11 +906,11 @@ function renderModal(step){
       ${dsCtx()}${steps(2)}
       <div class="field"><label for="personaSel">I am a…</label><select id="personaSel">${opts}</select></div>
       <div id="envPrev"></div>
-      <div class="mfoot"><button class="btn btn-ghost" id="soBtn">Sign out</button><button class="btn btn-primary" id="contBtn" style="flex:2">${pendingDataset?"Continue to request →":"Enter the nexus →"}</button></div>`;
+      <div class="mfoot"><button class="btn btn-ghost" id="soBtn">Sign out</button><button class="btn btn-primary" id="contBtn" style="flex:2">${exchangeMode?"Continue to exchange →":pendingDataset?"Continue to request →":"Enter the nexus →"}</button></div>`;
     const sel=$("#personaSel"); const prev=()=>{const p=PERSONAS[sel.value];$("#envPrev").innerHTML=`<div class="clr" style="margin-bottom:18px">${CLASS_DATA.map(c=>{const a=p.access[c.key];return `<span class="cls ${c.key}" style="${a==='n'?'opacity:.32':''}"><i></i>${c.t} ${a==='y'?'✓':a==='c'?'·agreement':'·closed'}</span>`}).join("")}</div>`;};
     sel.onchange=()=>{SESSION.persona=sel.value;prev();}; prev();
     $("#soBtn").onclick=signOut;
-    $("#contBtn").onclick=()=>{SESSION.persona=sel.value;persistSession();renderModal(pendingDataset?"request":"done");};
+    $("#contBtn").onclick=()=>{SESSION.persona=sel.value;persistSession();renderModal(exchangeMode?"exchange":pendingDataset?"request":"done");};
   }
   else if(step==="request"){
     const p=PERSONAS[SESSION.persona], a=pendingDataset?p.access[pendingDataset.cls]:"y";
@@ -802,6 +924,36 @@ function renderModal(step){
       <div class="mfoot"><button class="btn btn-ghost" id="backBtn">Back</button><button class="btn btn-primary" id="subBtn" style="flex:2">Submit request</button></div>`;
     $("#backBtn").onclick=()=>renderModal("persona");
     $("#subBtn").onclick=()=>renderModal("done");
+  }
+  else if(step==="exchange"){
+    const govt=["agency","partner","steward"].includes(SESSION.persona);
+    const provOpts=ENTITY_DATA.filter(e=>!e.gov).map(e=>`<option>${e.name}</option>`).join("");
+    const dsOpts=DATASET_DATA.map(d=>`<option value="${d.cls}">${d.t}</option>`).join("");
+    modalBody.innerHTML=`${seal}<div class="mk">Data Exchange Hub · governed by CRDA</div>
+      <h3>Propose a <em>data exchange</em></h3>
+      <p>Request data from another government entity. The hub classifies it and routes the proposal to CRDA before any exchange begins.</p>
+      ${govt?'':'<div class="ssoflag">Exchanges run between government entities. You can preview the flow, but a Government Agency, Infrastructure Partner or Data Steward persona is needed to submit one.</div>'}
+      ${steps(2)}
+      <div class="field"><label for="exProv">Provider entity</label><select id="exProv">${provOpts}</select></div>
+      <div class="field"><label for="exDs">Dataset requested</label><select id="exDs">${dsOpts}</select></div>
+      <div class="field"><label for="exPurpose">Purpose &amp; legal basis</label><input id="exPurpose" placeholder="e.g. inter-agency flood-risk modelling"></div>
+      <div id="exVerdict"></div>
+      <div class="mfoot"><button class="btn btn-ghost" id="exCancel">Cancel</button><button class="btn btn-primary" id="exSub" style="flex:2">Submit to CRDA review →</button></div>`;
+    const dsSel=$("#exDs");
+    const upd=()=>{const cls=dsSel.value,c=CLS[cls];const msg=cls==="public"?"Open exchange — registered and logged, no agreement needed.":cls==="confidential"?"Confidential — CRDA approval is unlikely; strictly need-to-know.":"Routed to CRDA for a time-boxed data-sharing agreement.";$("#exVerdict").innerHTML=`<div class="ds-ctx"><span class="cls ${cls}"><i></i>${c.t}</span><span>${msg}</span></div>`;};
+    dsSel.onchange=upd; upd();
+    $("#exCancel").onclick=closeModal;
+    $("#exSub").onclick=()=>renderModal("exchangeDone");
+  }
+  else if(step==="exchangeDone"){
+    const ref="DX-AP-"+String(Date.now()%100000).padStart(5,"0");
+    modalBody.innerHTML=`<div class="ok-screen"><div class="tick">✓</div>
+      <h3>Submitted to <em>CRDA review</em>.</h3>
+      <p>Exchange reference <b>${ref}</b></p>
+      <ul><li>CRDA verifies purpose, legal basis and consent (DPDP)</li><li>On approval a time-boxed data-sharing agreement is registered</li><li>A secure exchange channel opens between the two entities</li><li>Every transaction is logged under CRDA oversight</li></ul>
+      <div class="mfoot" style="margin-top:22px"><button class="btn btn-ghost" id="exView">View register</button><button class="btn btn-primary" id="exClose" style="flex:2">Done</button></div></div>`;
+    $("#exClose").onclick=closeModal;
+    $("#exView").onclick=()=>{closeModal();location.hash="#exchange";};
   }
   else if(step==="done"){
     const p=PERSONAS[SESSION.persona];
@@ -848,6 +1000,7 @@ renderAuth();
 $("#signInBtn").addEventListener("click",e=>{e.preventDefault();openFlow(null);});
 $("#userChip").addEventListener("click",()=>openFlow(null));
 $("#heroRequest").addEventListener("click",e=>{e.preventDefault();openFlow(null);});
+$("#proposeBtn").addEventListener("click",e=>{e.preventDefault();openExchange();});
 document.querySelectorAll("[data-open-auth]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();openFlow(null);}));
 $("#ovClose").addEventListener("click",closeModal);
 ov.addEventListener("click",e=>{if(e.target===ov)closeModal();});
