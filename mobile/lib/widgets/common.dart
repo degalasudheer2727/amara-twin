@@ -5,6 +5,40 @@ import '../theme.dart';
 
 /// Small, reusable, decoupled UI atoms shared across feature screens.
 
+const double kContentMaxWidth = 720;
+
+/// Centres a screen's scrollable and caps it at [maxWidth] on wide viewports
+/// while staying edge-to-edge on phones, so screens reflow phone -> desktop.
+class AdaptiveContent extends StatelessWidget {
+  final Widget child;
+  final double maxWidth;
+  const AdaptiveContent(
+      {super.key, required this.child, this.maxWidth = kContentMaxWidth});
+
+  @override
+  Widget build(BuildContext context) => Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: maxWidth),
+          child: child,
+        ),
+      );
+}
+
+/// A width-driven grid delegate: columns grow with available width, so a grid
+/// reflows from 2-up on a phone to many-up on a tablet or desktop.
+SliverGridDelegate adaptiveGrid({
+  required double maxExtent,
+  required double aspect,
+  double spacing = 12,
+}) =>
+    SliverGridDelegateWithMaxCrossAxisExtent(
+      maxCrossAxisExtent: maxExtent,
+      mainAxisSpacing: spacing,
+      crossAxisSpacing: spacing,
+      childAspectRatio: aspect,
+    );
+
 /// A pill showing a dataset's confidentiality classification.
 class ClassBadge extends StatelessWidget {
   final Classification classification;

@@ -86,7 +86,8 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
               ),
             ],
           ),
-          body: CustomScrollView(
+          body: AdaptiveContent(
+              child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
                 child: Padding(
@@ -157,7 +158,7 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
                 ),
               ),
             ],
-          ),
+          )),
         );
       },
     );

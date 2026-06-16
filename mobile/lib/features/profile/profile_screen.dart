@@ -20,7 +20,8 @@ class ProfileScreen extends StatelessWidget {
         final user = auth.user;
         final persona =
             user == null ? null : repo.personaByKey(user.personaKey);
-        return ListView(
+        return AdaptiveContent(
+            child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 64, 20, 28),
           children: [
             const SectionHeader(kicker: 'You', title: 'Your access'),
@@ -115,7 +116,7 @@ class ProfileScreen extends StatelessWidget {
                   TextStyle(color: AppColors.muted2, fontSize: 11, height: 1.6),
             ),
           ],
-        );
+        ));
       },
     );
   }
