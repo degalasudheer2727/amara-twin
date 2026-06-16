@@ -12,7 +12,8 @@ class FuturesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = repo.futures();
-    return CustomScrollView(slivers: [
+    return AdaptiveContent(
+        child: CustomScrollView(slivers: [
       const SliverToBoxAdapter(
         child: Padding(
           padding: EdgeInsets.fromLTRB(20, 64, 20, 16),
@@ -97,6 +98,6 @@ class FuturesScreen extends StatelessWidget {
           ),
         ),
       ),
-    ]);
+    ]));
   }
 }

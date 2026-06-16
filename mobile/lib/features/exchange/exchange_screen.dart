@@ -48,7 +48,8 @@ class ExchangeScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: ListView(
+      body: AdaptiveContent(
+          child: ListView(
         padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
         children: [
           const Text(
@@ -99,7 +100,7 @@ class ExchangeScreen extends StatelessWidget {
                 TextStyle(color: AppColors.muted2, fontSize: 11, height: 1.6),
           ),
         ],
-      ),
+      )),
     );
   }
 }

@@ -10,7 +10,8 @@ class CitiesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cities = repo.cities();
-    return CustomScrollView(slivers: [
+    return AdaptiveContent(
+        child: CustomScrollView(slivers: [
       const SliverToBoxAdapter(
         child: Padding(
           padding: EdgeInsets.fromLTRB(20, 64, 20, 12),
@@ -25,11 +26,7 @@ class CitiesScreen extends StatelessWidget {
       SliverPadding(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
         sliver: SliverGrid(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              childAspectRatio: 0.92),
+          gridDelegate: adaptiveGrid(maxExtent: 220, aspect: 0.92),
           delegate: SliverChildBuilderDelegate(
             (_, i) {
               final c = cities[i];
@@ -54,8 +51,6 @@ class CitiesScreen extends StatelessWidget {
                       Text(c.title,
                           style: const TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 14)),
-                      const SizedBox(height: 3),
-                      Text(c.telugu, style: AppTheme.telugu(12)),
                       const SizedBox(height: 8),
                       Text(c.description,
                           style: const TextStyle(
@@ -78,6 +73,6 @@ class CitiesScreen extends StatelessWidget {
           ),
         ),
       ),
-    ]);
+    ]));
   }
 }

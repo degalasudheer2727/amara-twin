@@ -3,6 +3,7 @@ import '../../data/auth.dart';
 import '../../data/repository.dart';
 import '../../models/models.dart';
 import '../../theme.dart';
+import '../../widgets/common.dart';
 
 /// Onboarding / single sign-on. Real Gmail SSO, then a persona choice that sets
 /// the user's access envelope. Optionally carries a [requesting] dataset so
@@ -48,36 +49,36 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         animation: auth,
         builder: (context, _) {
           return SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(22, 8, 22, 28),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const _Seal(),
-                  const SizedBox(height: 18),
-                  const Text('data.amaravati · Single sign-on',
-                      style: TextStyle(
-                          color: AppColors.saffron,
-                          fontSize: 11,
-                          letterSpacing: 2.2,
-                          fontWeight: FontWeight.w600)),
-                  const SizedBox(height: 10),
-                  Text(
-                      auth.isSignedIn
-                          ? 'Choose your persona'
-                          : 'Sign in to request data',
-                      style: AppTheme.display(28)),
-                  const SizedBox(height: 6),
-                  Text('అమరావతి డేటా · ప్రవేశం', style: AppTheme.telugu(15)),
-                  const SizedBox(height: 14),
-                  if (ds != null) _DatasetContext(ds),
-                  const SizedBox(height: 18),
-                  if (!auth.isSignedIn)
-                    _SignIn(busy: _busy, onGoogle: () => _google(auth))
-                  else
-                    _PersonaPicker(
-                        repo: widget.repo, auth: auth, requesting: ds),
-                ],
+            child: AdaptiveContent(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(22, 8, 22, 28),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const _Seal(),
+                    const SizedBox(height: 18),
+                    const Text('data.amaravati · Single sign-on',
+                        style: TextStyle(
+                            color: AppColors.saffron,
+                            fontSize: 11,
+                            letterSpacing: 2.2,
+                            fontWeight: FontWeight.w600)),
+                    const SizedBox(height: 10),
+                    Text(
+                        auth.isSignedIn
+                            ? 'Choose your persona'
+                            : 'Sign in to request data',
+                        style: AppTheme.display(28)),
+                    const SizedBox(height: 14),
+                    if (ds != null) _DatasetContext(ds),
+                    const SizedBox(height: 18),
+                    if (!auth.isSignedIn)
+                      _SignIn(busy: _busy, onGoogle: () => _google(auth))
+                    else
+                      _PersonaPicker(
+                          repo: widget.repo, auth: auth, requesting: ds),
+                  ],
+                ),
               ),
             ),
           );

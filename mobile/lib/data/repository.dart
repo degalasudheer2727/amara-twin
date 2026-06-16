@@ -185,26 +185,26 @@ class MockRepository implements AmaraverseRepository {
 
   @override
   List<ThemeCity> cities() => const [
-        ThemeCity('Government City', 'పరిపాలన నగరం',
-            'The legislative & administrative spine.', AppColors.saffron, 142),
-        ThemeCity('Justice City', 'న్యాయ నగరం',
-            'High Court & judicial precinct.', AppColors.gold, 64),
-        ThemeCity('Finance City', 'ఆర్థిక నగరం', 'Banking, markets & capital.',
-            AppColors.green, 88),
-        ThemeCity('Knowledge City', 'విజ్ఞాన నగరం', 'Universities & research.',
-            AppColors.pulse, 121),
-        ThemeCity('Health City', 'ఆరోగ్య నగరం', 'Hospitals & life sciences.',
-            AppColors.saffron, 77),
-        ThemeCity('Sports City', 'క్రీడా నగరం', 'Stadia & athletic venues.',
-            AppColors.cyan, 39),
-        ThemeCity('Media City', 'మీడియా నగరం', 'Film, broadcast & creative.',
-            AppColors.saffron, 45),
-        ThemeCity('Tourism City', 'పర్యాటక నగరం',
-            'Riverfront, culture & leisure.', AppColors.saffron, 58),
-        ThemeCity('Electronics City', 'ఎలక్ట్రానిక్స్ నగరం',
-            'Manufacturing & deep-tech.', AppColors.saffron, 83),
-        ThemeCity('Quantum Valley', 'క్వాంటం వ్యాలీ',
-            'Quantum compute & frontier R&D.', AppColors.saffron, 96),
+        ThemeCity('Government City', 'The legislative & administrative spine.',
+            AppColors.saffron, 142),
+        ThemeCity('Justice City', 'High Court & judicial precinct.',
+            AppColors.gold, 64),
+        ThemeCity(
+            'Finance City', 'Banking, markets & capital.', AppColors.green, 88),
+        ThemeCity(
+            'Knowledge City', 'Universities & research.', AppColors.pulse, 121),
+        ThemeCity(
+            'Health City', 'Hospitals & life sciences.', AppColors.saffron, 77),
+        ThemeCity(
+            'Sports City', 'Stadia & athletic venues.', AppColors.cyan, 39),
+        ThemeCity(
+            'Media City', 'Film, broadcast & creative.', AppColors.saffron, 45),
+        ThemeCity('Tourism City', 'Riverfront, culture & leisure.',
+            AppColors.saffron, 58),
+        ThemeCity('Electronics City', 'Manufacturing & deep-tech.',
+            AppColors.saffron, 83),
+        ThemeCity('Quantum Valley', 'Quantum compute & frontier R&D.',
+            AppColors.saffron, 96),
       ];
 
   /// Forward-looking capability roadmap — the digital city of 2040.
@@ -298,22 +298,18 @@ class MockRepository implements AmaraverseRepository {
   List<ClassTier> classes() => const [
         ClassTier(
             Classification.public,
-            'బహిరంగ',
             'Open data anyone can use, share and build on under an open licence.',
             'Instant download / open API · no sign-in needed'),
         ClassTier(
             Classification.internal,
-            'అంతర్గత',
             'Operational data shared across agencies and verified partners.',
             'Signed-in request, API key issued · access logged'),
         ClassTier(
             Classification.restricted,
-            'పరిమిత',
             'Sensitive or commercially valuable data needing a data-sharing agreement.',
             'Agreement + purpose review · time-boxed, consent-bound'),
         ClassTier(
             Classification.confidential,
-            'గోప్యం',
             'Personal, security or individually-identifying records — strict need-to-know.',
             'Closed · DPO approval, need-to-know, full audit'),
       ];
@@ -323,7 +319,6 @@ class MockRepository implements AmaraverseRepository {
         Persona(
             key: 'citizen',
             title: 'Citizen',
-            telugu: 'పౌరుడు',
             description:
                 'Residents exploring their ward — services, air, water and build progress.',
             icon: Icons.person,
@@ -336,7 +331,6 @@ class MockRepository implements AmaraverseRepository {
         Persona(
             key: 'researcher',
             title: 'Researcher · Academia',
-            telugu: 'పరిశోధకుడు',
             description:
                 'Universities & analysts working on aggregate, de-identified data.',
             icon: Icons.school,
@@ -349,7 +343,6 @@ class MockRepository implements AmaraverseRepository {
         Persona(
             key: 'startup',
             title: 'Startup · Enterprise',
-            telugu: 'సంస్థ',
             description:
                 'Builders shipping products on governed commercial feeds and APIs.',
             icon: Icons.rocket_launch,
@@ -362,7 +355,6 @@ class MockRepository implements AmaraverseRepository {
         Persona(
             key: 'agency',
             title: 'Government Agency',
-            telugu: 'ప్రభుత్వ సంస్థ',
             description:
                 'Departments exchanging operational data under governed agreements.',
             icon: Icons.account_balance,
@@ -375,7 +367,6 @@ class MockRepository implements AmaraverseRepository {
         Persona(
             key: 'partner',
             title: 'Infrastructure Partner',
-            telugu: 'భాగస్వామి',
             description:
                 'Utilities & concessionaires operating city systems at scale.',
             icon: Icons.handshake,
@@ -388,7 +379,6 @@ class MockRepository implements AmaraverseRepository {
         Persona(
             key: 'steward',
             title: 'Data Steward',
-            telugu: 'డేటా స్టీవార్డ్',
             description:
                 'Custodians who publish, classify and govern the catalogue.',
             icon: Icons.verified_user,

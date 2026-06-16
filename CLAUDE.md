@@ -21,8 +21,8 @@ Read this before making changes.
 
 India tricolour-derived, govt-credible: saffron `#ff9933`, green `#138808`, navy
 `#0a1f44`, Ashoka-chakra "pulse" `#3b7bff`, premium gold `#e7c46b`. Display face is a
-serif (Georgia on web / Noto Serif in app); Telugu via Noto Sans Telugu. Bilingual
-throughout.
+serif (Georgia on web / Noto Serif in app). English throughout (the earlier
+bilingual Telugu layer has been retired).
 
 ## Architecture
 

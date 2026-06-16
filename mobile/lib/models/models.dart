@@ -40,17 +40,15 @@ extension ClassificationMeta on Classification {
 @immutable
 class ClassTier {
   final Classification kind;
-  final String telugu;
   final String description;
   final String path;
-  const ClassTier(this.kind, this.telugu, this.description, this.path);
+  const ClassTier(this.kind, this.description, this.path);
 }
 
 @immutable
 class Persona {
   final String key;
   final String title;
-  final String telugu;
   final String description;
   final IconData icon;
 
@@ -59,7 +57,6 @@ class Persona {
   const Persona({
     required this.key,
     required this.title,
-    required this.telugu,
     required this.description,
     required this.icon,
     required this.access,
@@ -221,12 +218,10 @@ class Connector {
 @immutable
 class ThemeCity {
   final String title;
-  final String telugu;
   final String description;
   final Color color;
   final int datasets;
-  const ThemeCity(
-      this.title, this.telugu, this.description, this.color, this.datasets);
+  const ThemeCity(this.title, this.description, this.color, this.datasets);
 }
 
 @immutable

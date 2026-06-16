@@ -13,7 +13,8 @@ class HomeScreen extends StatelessWidget {
     final signals = repo.liveSignals();
     final pillars = repo.pillars();
 
-    return CustomScrollView(
+    return AdaptiveContent(
+        child: CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
           child: Container(
@@ -41,8 +42,6 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 14),
                 Text('The People’s Capital,\nin your pocket.',
                     style: AppTheme.display(30)),
-                const SizedBox(height: 8),
-                Text('అమరావతి', style: AppTheme.telugu(16)),
                 const SizedBox(height: 14),
                 const Text(
                   'A governed data platform and navigable digital twin for the Amaravati master plan — open, internal, sensitive and confidential data, by your authority.',
@@ -57,11 +56,7 @@ class HomeScreen extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(20, 4, 20, 8),
           sliver: SliverGrid(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                childAspectRatio: 1.7),
+            gridDelegate: adaptiveGrid(maxExtent: 220, aspect: 1.7),
             delegate: SliverChildBuilderDelegate(
               (_, i) {
                 final k = kpis[i];
@@ -197,6 +192,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ],
-    );
+    ));
   }
 }

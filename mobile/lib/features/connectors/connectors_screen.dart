@@ -11,7 +11,8 @@ class ConnectorsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = repo.connectors();
-    return CustomScrollView(slivers: [
+    return AdaptiveContent(
+        child: CustomScrollView(slivers: [
       const SliverToBoxAdapter(
         child: Padding(
           padding: EdgeInsets.fromLTRB(20, 64, 20, 12),
@@ -35,7 +36,7 @@ class ConnectorsScreen extends StatelessWidget {
           ),
         ),
       ),
-    ]);
+    ]));
   }
 }
 

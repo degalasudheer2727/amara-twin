@@ -77,8 +77,4 @@ class AppTheme {
           color: color ?? AppColors.text,
           fontWeight: w,
           height: 1.05);
-
-  static TextStyle telugu(double size, {Color? color}) =>
-      GoogleFonts.notoSansTelugu(
-          fontSize: size, color: color ?? AppColors.saffron);
 }
