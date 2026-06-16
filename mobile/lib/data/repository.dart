@@ -34,7 +34,7 @@ class MockRepository implements AmaraverseRepository {
   const MockRepository();
 
   @override
-  String get twinUrl => 'https://amara-twin.vercel.app/';
+  String get twinUrl => 'https://data-amaravati.vercel.app/';
 
   @override
   List<Kpi> kpis() => const [
