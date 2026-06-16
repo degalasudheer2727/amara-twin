@@ -455,6 +455,32 @@
     .l-spire,.ticker .track,.hero-foot .ln,.eyebrow .live i,.card .status i,.l-bar i{animation:none}
     *{scroll-behavior:auto;transition-duration:.001ms!important}
   }
+
+  /* ---------- data exchange hub · separate journey ---------- */
+  /* nav menu entry, deliberately carrying the brand gradient so the journey
+     is discoverable at any sight */
+  .nav-route{color:#fff!important;background:var(--grad);padding:8px 17px;border-radius:30px;font-weight:600;font-size:12.5px;letter-spacing:.02em;box-shadow:0 10px 26px -12px rgba(37,99,235,.5);transition:transform .2s,box-shadow .2s}
+  .nav-route:hover{color:#fff!important;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(14,124,112,.5)}
+  .nav-route.active{box-shadow:0 0 0 2px var(--gold),0 10px 26px -12px rgba(37,99,235,.5)}
+  @media(max-width:920px){.navlinks a.nav-route{display:inline-flex}}
+  .route-view{position:relative;z-index:5;background:var(--bg)}
+  /* keep the fixed nav legible over the gradient journey hero */
+  body.routed nav.top{background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-color:var(--line-soft)}
+  body.routed.hc nav.top{background:#000}
+  .jrn-hero{position:relative;background:var(--grad);color:#fff;padding:clamp(104px,16vh,156px) clamp(18px,5vw,56px) clamp(52px,8vh,90px);overflow:hidden}
+  .jrn-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(78% 120% at 86% 0,rgba(255,255,255,.20),transparent 55%);pointer-events:none}
+  .jrn-in{max-width:var(--maxw);margin:0 auto;position:relative;z-index:2}
+  .jrn-back{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-size:12.5px;letter-spacing:.04em;font-weight:600;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.36);padding:8px 16px;border-radius:30px;margin-bottom:30px;transition:background .2s}
+  .jrn-back:hover{background:rgba(255,255,255,.3)}
+  .jrn-badge{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:700;margin-bottom:16px;color:#fff}
+  .jrn-badge i{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+  .jrn-hero h1{font-family:var(--display);font-weight:400;font-size:clamp(2.3rem,5.6vw,4.2rem);line-height:1.03;letter-spacing:-.02em;margin-bottom:18px;max-width:18ch;color:#fff}
+  .jrn-hero h1 em{font-style:italic;color:#fff;opacity:.86}
+  .jrn-hero p{font-size:clamp(1.02rem,1.5vw,1.2rem);color:rgba(255,255,255,.92);max-width:62ch;line-height:1.6}
+  .jrn-body{position:relative;z-index:3;background:linear-gradient(180deg,var(--bg-2),var(--bg-3));padding:clamp(52px,9vh,96px) 0 clamp(64px,11vh,120px)}
+  .jrn-body .sec-head:first-of-type{margin-top:0}
+  .jrn-foot{max-width:var(--maxw);margin:44px auto 0;padding:0 clamp(18px,5vw,56px);text-align:center}
+  .jrn-note{margin-top:30px;font-size:11.5px;color:var(--muted-2);text-align:center;padding:0 clamp(18px,5vw,56px)}
 </style>
 </head>
 <body>
@@ -516,9 +542,9 @@
   </a>
   <div class="navlinks">
     <a href="#catalogue">Catalogue</a>
-    <a href="#exchange">Exchange Hub</a>
     <a href="#access">Access &amp; Roles</a>
     <a href="#cities">Theme Cities</a>
+    <a href="#exchange" class="nav-route" id="navExchange" role="button" aria-label="Open the Data Exchange Hub journey">Exchange Hub →</a>
     <div class="auth">
       <button class="user-chip" id="userChip" aria-label="Your account">
         <span class="av" id="userAv">U</span>
@@ -625,31 +651,7 @@
 </section>
 
 <!-- DATA EXCHANGE HUB -->
-<section class="content alt" id="exchange">
-  <div class="sec-head reveal">
-    <span class="kicker">Data Exchange Hub · governed by CRDA</span>
-    <h2>Government data, <em>exchanged under governance.</em></h2>
-    <p>The hard part of open data isn't publishing — it's the governed exchange of sensitive data <em>between</em> agencies. data.amaravati gives every government entity one place to request and provide data, with <b>CRDA as the governing authority</b>: classifying data, approving sensitive and confidential exchanges, holding the register of agreements and auditing every transaction. Modelled on mature city data-exchange platforms.</p>
-  </div>
-  <div class="exflow reveal" id="exflow"></div>
-
-  <div class="sec-head reveal" style="margin-top:68px">
-    <span class="kicker">Participating entities</span>
-    <h2>A network of <em>providers &amp; consumers.</em></h2>
-    <p>Departments, utilities and statutory bodies join the hub as data providers, consumers or both — with CRDA presiding over the network.</p>
-  </div>
-  <div class="entities reveal" id="entities-grid"></div>
-
-  <div class="sec-head reveal" style="margin-top:68px">
-    <span class="kicker">The exchange register</span>
-    <h2>Live inter-agency <em>agreements.</em></h2>
-    <p>Every government-to-government exchange, its confidentiality class and where it sits in CRDA governance — open, under review, on agreement, or declined.</p>
-  </div>
-  <div class="ledger-wrap reveal"><table class="ledger" id="ledger"></table></div>
-  <div class="reveal" style="text-align:center;margin-top:36px;padding:0 clamp(18px,5vw,56px)">
-    <a href="#" class="btn btn-primary" id="proposeBtn">Propose an exchange ↗</a>
-  </div>
-</section>
+<!-- Data Exchange Hub is its own routed journey (#exchange) — see #exchangeRoute after </main> -->
 
 <!-- CITIES -->
 <section class="content alt" id="cities">
@@ -763,6 +765,45 @@
   </div>
 </div>
 </main>
+
+<!-- ============ DATA EXCHANGE HUB · SEPARATE JOURNEY ============ -->
+<div id="exchangeRoute" class="route-view" role="region" aria-label="Data Exchange Hub" hidden aria-hidden="true">
+  <div class="jrn-hero">
+    <div class="jrn-in">
+      <a href="#top" class="jrn-back" id="exReturn">← Back to platform</a>
+      <div class="jrn-badge"><i></i>Data Exchange Hub · governed by CRDA</div>
+      <h1>Government data, <em>exchanged under governance.</em></h1>
+      <p>The hard part of open data isn't publishing — it's the governed exchange of sensitive data <em>between</em> agencies. One place for every government entity to request and provide data, with <b>CRDA as the governing authority</b>: classifying data, approving sensitive and confidential exchanges, holding the register of agreements and auditing every transaction.</p>
+    </div>
+  </div>
+  <div class="jrn-body">
+    <div class="sec-head reveal">
+      <span class="kicker">The governed workflow</span>
+      <h2>From request to <em>provision.</em></h2>
+      <p>Six governed steps, with CRDA presiding over classification, approval and audit.</p>
+    </div>
+    <div class="exflow reveal" id="exflow"></div>
+
+    <div class="sec-head reveal" style="margin-top:68px">
+      <span class="kicker">Participating entities</span>
+      <h2>A network of <em>providers &amp; consumers.</em></h2>
+      <p>Departments, utilities and statutory bodies join the hub as data providers, consumers or both — with CRDA presiding over the network.</p>
+    </div>
+    <div class="entities reveal" id="entities-grid"></div>
+
+    <div class="sec-head reveal" style="margin-top:68px">
+      <span class="kicker">The exchange register</span>
+      <h2>Live inter-agency <em>agreements.</em></h2>
+      <p>Every government-to-government exchange, its confidentiality class and where it sits in CRDA governance — open, under review, on agreement, or declined.</p>
+    </div>
+    <div class="ledger-wrap reveal"><table class="ledger" id="ledger"></table></div>
+
+    <div class="jrn-foot reveal">
+      <a href="#" class="btn btn-primary" id="proposeBtn">Propose an exchange ↗</a>
+    </div>
+    <p class="jrn-note">data.amaravati is a concept — exchange agreements shown are illustrative.</p>
+  </div>
+</div>
 
 <!-- Google Identity Services (real Gmail SSO; activates once GOOGLE_CLIENT_ID is set) -->
 <script src="https://accounts.google.com/gsi/client" async></script>
@@ -1187,6 +1228,30 @@ addEventListener("scroll",()=>{
   const h=document.documentElement.scrollHeight-innerHeight;
   prog.style.width=(h>0?(sc/h*100):0)+"%";
 },{passive:true});
+
+/* ---------- Data Exchange Hub: its own routed journey ---------- */
+(function(){
+  const main=$("#main"), view=$("#exchangeRoute"), navEx=$("#navExchange");
+  if(!view) return;
+  function render(){
+    const on=location.hash==="#exchange";
+    view.hidden=!on; view.setAttribute("aria-hidden",String(!on));
+    if(main) main.style.display=on?"none":"";
+    if(navEx) navEx.classList.toggle("active",on);
+    document.body.classList.toggle("routed",on);
+    if(on){
+      view.querySelectorAll(".reveal").forEach(e=>e.classList.add("in"));
+      window.scrollTo(0,0);
+    }else if(!location.hash||location.hash==="#"||location.hash==="#top"){
+      window.scrollTo(0,0);
+    }else{
+      const t=document.querySelector(location.hash);
+      if(t) requestAnimationFrame(()=>t.scrollIntoView({behavior:"smooth",block:"start"}));
+    }
+  }
+  addEventListener("hashchange",render);
+  render();
+})();
 
 /* loader */
 let lp=0;const lbar=$("#lbar");
