@@ -547,38 +547,97 @@
   .ck-sig{border:1px solid var(--line-soft);border-left:3px solid var(--sc,var(--saffron));border-radius:12px;background:var(--surface);padding:16px 18px}
   .ck-sig .sh{font-weight:600;font-size:.93rem;margin-bottom:6px}
   .ck-sig .sd{font-size:12.5px;color:var(--muted);line-height:1.5}
+
+/* ================= REVAMP · glass + gradient SaaS dashboard ================= */
+:root{
+  --r-lg:22px; --r-md:16px;
+  --glass:rgba(255,255,255,.55); --glass-2:rgba(255,255,255,.74); --glass-line:rgba(255,255,255,.65);
+  --side-w:266px; --grad-warm:linear-gradient(125deg,#e7c46b,#caa23f);
+  --surface:rgba(255,255,255,.5); --surface-2:rgba(255,255,255,.62); --surface-solid:rgba(255,255,255,.74);
+  --radius:18px;
+}
+html,body{height:100%}
+body{background:#e9eef5;overflow:hidden}
+.bgmesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bgmesh i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55}
+.bgmesh i:nth-child(1){width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle,#10b98166,transparent 62%);animation:fl1 24s ease-in-out infinite}
+.bgmesh i:nth-child(2){width:48vw;height:48vw;right:-10vw;bottom:-16vw;background:radial-gradient(circle,#2563eb55,transparent 62%);animation:fl2 28s ease-in-out infinite}
+.bgmesh i:nth-child(3){width:34vw;height:34vw;left:40vw;top:30vh;background:radial-gradient(circle,#e7c46b3a,transparent 62%);animation:fl1 32s ease-in-out infinite reverse}
+@keyframes fl1{0%,100%{transform:translate(0,0)}50%{transform:translate(6vw,5vh)}}
+@keyframes fl2{0%,100%{transform:translate(0,0)}50%{transform:translate(-5vw,-4vh)}}
+#scene{position:fixed;inset:0;z-index:0;opacity:.18}
+
+.app{position:relative;z-index:2;display:grid;grid-template-columns:var(--side-w) 1fr;height:100vh;height:100dvh}
+.side{position:relative;z-index:3;display:flex;flex-direction:column;padding:20px 14px;background:rgba(255,255,255,.58);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);border-right:1px solid var(--glass-line)}
+.s-brand{display:flex;align-items:center;gap:12px;padding:6px 10px 16px;text-decoration:none;color:var(--ink)}
+.s-brand svg{width:38px;height:38px}
+.s-brand .bt b{font-family:var(--display);font-size:1.12rem;font-weight:400;display:block;line-height:1}
+.s-brand .bt b i{font-style:normal;background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+.s-brand .bt small{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted-2);margin-top:4px;display:block}
+.s-sec{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);padding:14px 14px 7px}
+.navlink{display:flex;align-items:center;gap:13px;padding:11px 14px;border-radius:14px;text-decoration:none;color:var(--muted);font-size:13.5px;font-weight:500;transition:background .2s,color .2s,box-shadow .2s;cursor:pointer}
+.navlink svg{width:19px;height:19px;flex:0 0 auto}
+.navlink:hover{background:rgba(14,19,32,.05);color:var(--ink)}
+.navlink.active{background:var(--grad);color:#fff;box-shadow:0 14px 28px -14px rgba(37,99,235,.55)}
+.navlink.lead.active{background:var(--grad-warm);color:#3a2c06;box-shadow:0 14px 28px -14px rgba(202,162,63,.55)}
+.s-grow{flex:1}
+.s-foot{font-size:10px;color:var(--muted-2);line-height:1.5;padding:12px 12px 2px;border-top:1px solid var(--line-soft);margin-top:8px}
+
+.shell{display:flex;flex-direction:column;min-width:0;height:100vh;height:100dvh}
+.topbar{display:flex;align-items:center;gap:16px;padding:14px 26px;background:rgba(255,255,255,.46);backdrop-filter:blur(20px) saturate(1.3);-webkit-backdrop-filter:blur(20px) saturate(1.3);border-bottom:1px solid var(--glass-line);flex:0 0 auto;min-height:64px}
+.topbar .tt{min-width:0;flex:0 1 auto}
+.topbar .tt h1{font-family:var(--display);font-weight:400;font-size:1.3rem;line-height:1.05;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .tt span{font-size:11px;color:var(--muted-2)}
+.topbar .grow{flex:1}
+.tk{flex:1 1 0;min-width:0;max-width:360px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.tk .track{display:flex;gap:30px;white-space:nowrap;width:max-content;animation:slide 38s linear infinite}
+.tk .it{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted)}
+.tk .it b{color:var(--text);font-family:var(--display);font-weight:400}
+.tk .it .pu{width:6px;height:6px;border-radius:50%;background:var(--saffron);box-shadow:0 0 8px var(--saffron)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+.canvas{flex:1;overflow-y:auto;overflow-x:hidden;padding:26px 28px 40px;scroll-behavior:smooth}
+.view{display:none}
+.view.on{display:block;animation:vin .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes vin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.maxw{max-width:1140px;margin:0 auto}
+.reveal{opacity:1!important;transform:none!important}
+
+/* hero/overview banner */
+.ov-hero{position:relative;overflow:hidden;border-radius:var(--r-lg);padding:clamp(26px,4vw,46px);background:linear-gradient(125deg,rgba(16,185,129,.16),rgba(37,99,235,.14));border:1px solid var(--glass-line);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);margin-bottom:22px}
+.ov-hero .kk{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:14px;display:inline-flex;align-items:center;gap:9px}
+.ov-hero .kk i{width:7px;height:7px;border-radius:50%;background:var(--saffron);box-shadow:0 0 10px var(--saffron)}
+.ov-hero h2{font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,3.6vw,3rem);line-height:1.04;letter-spacing:-.02em;margin-bottom:14px;max-width:18ch}
+.ov-hero h2 em{font-style:italic;background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ov-hero p{font-size:1.02rem;color:var(--muted);max-width:60ch;line-height:1.6;margin-bottom:22px}
+.ov-cta{display:flex;gap:12px;flex-wrap:wrap}
+
+/* glassify the reused components */
+.kpi,.pillar,.card,.entity,.estep,.tier,.persona,.kpi-card,.ck-tile,.ck-sig,.kpi-lock,.matrix-wrap,.ledger-wrap,.ds-card,.dataset{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.kpis{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--glass-line);background:var(--glass)}
+.sec-head{margin:30px auto 18px!important;padding:0!important;max-width:none!important}
+.sec-head .kicker{color:var(--saffron)}
+.pillars,.grid,.catalogue,.legend,.personas,.entities,.exflow,.kpi-wrap,.ck-tiles,.ck-signals,.matrix-wrap,.ledger-wrap{max-width:none!important;padding:0!important;margin:0 auto!important}
+.btn{border-radius:30px}
+.user-chip{cursor:pointer}
+
+/* responsive: collapse sidebar to a top row on small screens */
+@media(max-width:880px){
+  .app{grid-template-columns:1fr;height:auto;min-height:100dvh}
+  .side{flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px;border-right:none;border-bottom:1px solid var(--glass-line);position:sticky;top:0;z-index:30}
+  .s-brand{padding:6px 8px;flex:1 1 100%}
+  .s-sec,.s-foot{display:none}.s-grow{display:none}
+  .navlink{padding:9px 12px;font-size:12.5px}
+  body{overflow:auto}.shell{height:auto}.canvas{height:auto;overflow:visible}
+}
+
 </style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
 
-<!-- GIGW accessibility & language utility bar -->
-<div class="gov-util" role="region" aria-label="Accessibility options">
-  <div class="gu-in">
-    <a href="#main" class="gu-a">Skip to main content</a>
-    <span class="gu-sep" aria-hidden="true"></span>
-    <a href="#accessibility" class="gu-a">Screen reader access</a>
-    <span class="gu-spacer"></span>
-    <span class="gu-grp" role="group" aria-label="Text size">
-      <button type="button" id="fontDec" class="gu-b" aria-label="Decrease text size">A&minus;</button>
-      <button type="button" id="fontStd" class="gu-b" aria-label="Reset text size">A</button>
-      <button type="button" id="fontInc" class="gu-b" aria-label="Increase text size">A+</button>
-    </span>
-    <button type="button" id="hcToggle" class="gu-b" aria-pressed="false">High contrast</button>
-  </div>
-</div>
+<div class="bgmesh" aria-hidden="true"><i></i><i></i><i></i></div>
+<div id="scene" aria-hidden="true"></div>
 
-<!-- loader -->
-<div id="loader">
-  <div class="l-mark">
-    <svg class="l-spire" aria-hidden="true"><use href="#amaraMark"/></svg>
-    data<span>.amaravati</span>
-  </div>
-  <div class="l-bar"><i id="lbar"></i></div>
-  <div class="l-sub">Opening the governed data platform…</div>
-</div>
-
-<!-- Amaravati Spire — original iconic-tower mark (logo + hero centrepiece) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
   <linearGradient id="spireGrad" gradientUnits="userSpaceOnUse" x1="32" y1="116" x2="32" y2="0"><stop offset="0" stop-color="#10b981"/><stop offset=".55" stop-color="#15a3b0"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
   <symbol id="amaraSpire" viewBox="0 0 64 116">
@@ -598,221 +657,114 @@
   <symbol id="amaraMark" viewBox="0 0 48 48"><rect width="48" height="48" rx="13" fill="url(#markGrad)"/><path d="M15.5 34 L24 15.5 L32.5 34" fill="none" stroke="#fff" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><line x1="19.5" y1="27.5" x2="28.5" y2="27.5" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><circle cx="24" cy="11" r="2.6" fill="#fff"/></symbol>
 </defs></svg>
 
-<div class="prog" id="prog"></div>
-
-<!-- nav -->
-<nav class="top" id="nav">
-  <a class="brand" href="#top" aria-label="data.amaravati home">
-    <svg class="seal" aria-hidden="true"><use href="#amaraMark"/></svg>
-    <span><b>data<i>.amaravati</i></b><small aria-hidden="true">Governed Data Platform · Amaravati</small></span>
-  </a>
-  <div class="navlinks">
-    <a href="#catalogue" data-nav="catalogue">Catalogue</a>
-    <a href="#access" data-nav="access">Access &amp; Trust</a>
-    <a href="#cockpit" class="nav-lead" id="navCockpit" data-nav="cockpit" role="button" aria-label="Decision Cockpit — leadership oversight">Decision Cockpit</a>
-    <a href="#exchange" class="nav-route" id="navExchange" data-nav="exchange" role="button" aria-label="Exchange Hub — open the Data Exchange journey">Exchange Hub →</a>
-    <div class="auth">
-      <button class="user-chip" id="userChip" aria-label="Your account">
-        <span class="av" id="userAv">U</span>
-        <span><span class="un" id="userName">You</span><span class="ur" id="userRole">Citizen</span></span>
-      </button>
-      <a href="#" class="nav-cta" id="signInBtn" role="button">Sign in</a>
-    </div>
-  </div>
-</nav>
-
-<div id="scene" aria-hidden="true"></div>
-
-<main id="main">
-<a id="top"></a>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-inner">
-    <span class="eyebrow">Amaravati · The People's Capital <span class="live"><i></i>Live Nexus</span></span>
-    <h1>The governed data platform of a <em>capital being born.</em></h1>
-    <p class="lead"><b>data.amaravati</b> is the one-stop data platform for the People's Capital — turning open, internal, sensitive and confidential data into the insight higher officials use to <b>decide and make policy</b>, the KPIs that govern every entity, and a CRDA-governed exchange between them.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#catalogue">Browse the catalogue ↗</a>
-      <a class="btn btn-ghost" href="#" id="heroRequest">Request access</a>
-    </div>
-  </div>
-  <div class="hero-foot"><span class="ln"></span> Scroll to explore <span class="ln"></span></div>
-</header>
-
-<!-- TICKER -->
-<div class="ticker" aria-label="Live indicative city signals">
-  <div class="track" id="track"></div>
+<!-- loader -->
+<div id="loader">
+  <div class="l-mark"><svg class="l-spire" aria-hidden="true"><use href="#amaraMark"/></svg> data<span>.amaravati</span></div>
+  <div class="l-bar"><i id="lbar"></i></div>
+  <div class="l-sub">Opening the governed data platform…</div>
 </div>
 
-<!-- PILLARS + AT-A-GLANCE -->
-<section class="content alt" id="pillars">
-  <div class="sec-head reveal">
-    <span class="kicker" id="overview">A one-stop platform · five pillars of digital transformation</span>
-    <h2>One data platform for <em>decisions, governance &amp; exchange.</em></h2>
-    <p>Turn open, internal, sensitive and confidential data into decisions. Open the journey that fits your role — browse the catalogue, govern access, run the Decision Cockpit, or exchange data between entities.</p>
-  </div>
-  <div class="kpis reveal" id="kpis"></div>
-  <div class="pillars reveal" id="pillars-grid" style="margin-top:24px"></div>
-</section>
+<div class="app">
+  <aside class="side">
+    <a class="s-brand" href="#overview" data-view="overview" aria-label="data.amaravati home">
+      <svg viewBox="0 0 48 48"><use href="#amaraMark"/></svg>
+      <span class="bt"><b>data<i>.amaravati</i></b><small>Governed Data Platform</small></span>
+    </a>
+    <div class="s-sec">Platform</div>
+    <a class="navlink" href="#overview" data-view="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg><span>Overview</span></a>
+    <a class="navlink" href="#catalogue" data-view="catalogue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M2 13l10 5 10-5"/></svg><span>Data Catalogue</span></a>
+    <a class="navlink" href="#access" data-view="access"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/></svg><span>Access &amp; Trust</span></a>
+    <a class="navlink" href="#exchange" data-view="exchange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg><span>Exchange Hub</span></a>
+    <div class="s-sec">Leadership</div>
+    <a class="navlink lead" href="#cockpit" data-view="cockpit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 13l4-3"/></svg><span>Decision Cockpit</span></a>
+    <div class="s-grow"></div>
+    <div class="s-foot"><b>Concept — not official.</b> Not a Government of Andhra Pradesh or APCRDA product and not endorsed by either. Figures indicative.</div>
+  </aside>
 
-<!-- DATA EXCHANGE HUB -->
-<!-- Data Exchange Hub is its own routed journey (#exchange) — see #exchangeRoute after </main> -->
+  <div class="shell">
+    <header class="topbar">
+      <div class="tt"><h1 id="topTitle">Overview</h1><span id="topSub">One-stop governed data platform</span></div>
+      <div class="grow"></div>
+      <div class="tk" aria-hidden="true"><div class="track" id="track"></div></div>
+      <span class="gu-grp" role="group" aria-label="Text size">
+        <button type="button" id="fontDec" class="gu-b" aria-label="Decrease text size">A&minus;</button>
+        <button type="button" id="fontStd" class="gu-b" aria-label="Reset text size">A</button>
+        <button type="button" id="fontInc" class="gu-b" aria-label="Increase text size">A+</button>
+      </span>
+      <button type="button" id="hcToggle" class="gu-b" aria-pressed="false">High contrast</button>
+      <div class="auth">
+        <button class="user-chip" id="userChip" aria-label="Your account"><span class="av" id="userAv">U</span><span><span class="un" id="userName">You</span><span class="ur" id="userRole">Citizen</span></span></button>
+        <a href="#" class="btn btn-primary nav-cta" id="signInBtn" role="button">Sign in</a>
+      </div>
+    </header>
 
-<!-- FOOTER -->
-<footer>
-  <div class="foot-grid">
-    <div class="foot-brand">
-      <b>data<i>.amaravati</i></b>
-      <p>The concept governed data platform and living digital twin of Amaravati, the People's Capital.</p>
-    </div>
-    <div>
-      <h3>Platform</h3>
-      <a href="#cockpit" data-nav="cockpit">Decision Cockpit</a><a href="#catalogue" data-nav="catalogue">Catalogue</a><a href="#exchange" data-nav="exchange">Exchange Hub</a><a href="#access" data-nav="access">Access &amp; Trust</a>
-    </div>
-    <div>
-      <h3>Pillars</h3>
-      <a href="#pillars">Five pillars</a><a href="#top">Live twin</a><a href="#cockpit" data-nav="cockpit">Decision Cockpit</a>
-    </div>
-    <div>
-      <h3>Account</h3>
-      <a href="#" data-open-auth>Sign in</a><a href="#access" data-nav="access">Personas &amp; roles</a><a href="#accessibility">Accessibility</a>
-    </div>
+    <main class="canvas" id="main">
+      <!-- OVERVIEW -->
+      <section class="view on maxw" id="view-overview">
+        <div class="ov-hero reveal">
+          <span class="kk"><i></i>One-stop platform · five pillars of digital transformation</span>
+          <h2>One data platform for <em>decisions, governance &amp; exchange.</em></h2>
+          <p><b>data.amaravati</b> turns open, internal, sensitive and confidential data into the insight higher officials use to decide and make policy, the KPIs that govern every entity, and a CRDA-governed exchange between them.</p>
+          <div class="ov-cta">
+            <a class="btn btn-primary" href="#cockpit" data-view="cockpit">Open the Decision Cockpit ↗</a>
+            <a class="btn btn-ghost" href="#" id="heroRequest">Request data access</a>
+          </div>
+        </div>
+        <div class="kpis reveal" id="kpis"></div>
+        <div class="sec-head reveal"><span class="kicker">The five pillars</span><h2>Built on the <em>fundamentals of digital transformation.</em></h2></div>
+        <div class="pillars reveal" id="pillars-grid"></div>
+      </section>
+
+      <!-- CATALOGUE -->
+      <section class="view maxw" id="view-catalogue">
+        <div class="sec-head reveal"><span class="kicker">Data &amp; Interoperability</span><h2>The governed <em>data catalogue.</em></h2><p>Every dataset carries a format, cadence, owning department and a confidentiality class that decides who may request it.</p></div>
+        <div class="catbar reveal" id="catbar" role="group" aria-label="Filter datasets"></div>
+        <div class="catalogue reveal" id="catalogue-grid"></div>
+      </section>
+
+      <!-- ACCESS -->
+      <section class="view maxw" id="view-access">
+        <div class="sec-head reveal"><span class="kicker">Trust, Security &amp; Governance</span><h2>Right data, <em>right authority.</em></h2><p>Every dataset is graded across four tiers. Your authority — not your team — decides what you reach, the consent required and the audit kept.</p></div>
+        <div class="legend reveal" id="legend-grid"></div>
+        <div class="sec-head reveal"><span class="kicker">Personas</span><h2>One catalogue, <em>many entities.</em></h2></div>
+        <div class="personas reveal" id="personas-grid"></div>
+        <div class="sec-head reveal"><span class="kicker">The access matrix</span><h2>Persona <em>×</em> confidentiality.</h2></div>
+        <div class="matrix-wrap reveal"><table class="matrix" id="matrix"></table></div>
+      </section>
+
+      <!-- EXCHANGE -->
+      <section class="view maxw" id="view-exchange">
+        <div class="sec-head reveal"><span class="kicker">Data Exchange Hub · governed by CRDA</span><h2>Government data, <em>exchanged under governance.</em></h2><p>One place for every entity to request and provide data, with CRDA classifying it, approving sensitive exchanges and auditing every transaction.</p></div>
+        <div class="exflow reveal" id="exflow"></div>
+        <div class="sec-head reveal"><span class="kicker">Participating entities</span><h2>Providers &amp; <em>consumers.</em></h2></div>
+        <div class="entities reveal" id="entities-grid"></div>
+        <div class="sec-head reveal"><span class="kicker">The exchange register</span><h2>Live inter-agency <em>agreements.</em></h2></div>
+        <div class="ledger-wrap reveal"><table class="ledger" id="ledger"></table></div>
+        <div class="sec-head reveal"><span class="kicker">Stakeholder performance · weekly KPIs</span><h2>Every entity, <em>scored on its KPIs.</em></h2></div>
+        <div class="kpi-wrap reveal" id="kpiPanel"></div>
+        <div class="reveal" style="text-align:center;margin-top:26px"><a href="#" class="btn btn-primary" id="proposeBtn">Propose an exchange ↗</a></div>
+      </section>
+
+      <!-- COCKPIT -->
+      <section class="view maxw" id="view-cockpit">
+        <div class="sec-head reveal"><span class="kicker">Decision Cockpit · leadership oversight</span><h2>Decisions, <em>governed by data.</em></h2><p>A city-wide view of every government entity's performance, the insights that drive policy, and the signals that need a decision this week. Restricted to leadership.</p></div>
+        <div class="kpi-wrap reveal" id="cockpitPanel"></div>
+      </section>
+
+      <footer class="foot-mini" style="max-width:1140px;margin:40px auto 0;padding-top:20px;border-top:1px solid var(--line-soft);font-size:11.5px;color:var(--muted-2);line-height:1.7">
+        <b>Accessibility &amp; standards.</b> Built to GIGW and WCAG 2.1 AA — skip links, visible focus, ARIA landmarks, resizable text, high-contrast and reduced-motion.
+        <br><br>
+        <b>Concept prototype — not an official product.</b> data.amaravati is an independent concept inspired by the public Amaravati master plan and the spirit of CRDA's data-governance vision. It is <b>not</b> a Government of Andhra Pradesh or APCRDA product and is not endorsed by either. It deliberately does not use the official State Emblem or any copyrighted master-plan artwork. The 3D model is an original interpretation of the publicly documented city layout. All datasets shown are illustrative samples and all headline figures are indicative. © 2026 data.amaravati concept.
+      </footer>
+    </main>
   </div>
-  <nav class="foot-policies" aria-label="Website policies">
-    <a href="#accessibility">Accessibility Statement</a>
-    <a href="#access">Copyright Policy</a>
-    <a href="#access">Hyperlinking Policy</a>
-    <a href="#access">Terms &amp; Conditions</a>
-    <a href="#access">Privacy Policy</a>
-    <a href="#accessibility">Disclaimer</a>
-    <a href="#main">Sitemap</a>
-    <a href="#" data-open-auth>Help</a>
-    <a href="#" data-open-auth>Feedback</a>
-  </nav>
-  <div class="disclaimer" id="accessibility">
-    <b>Accessibility &amp; standards.</b> Built to GIGW and WCAG 2.1 AA — skip links, visible focus, ARIA landmarks, resizable text, high-contrast and reduced-motion. Reviewed June 2026.
-    <br><br>
-    <b>Concept prototype — not an official product.</b> data.amaravati is an independent concept inspired by the public Amaravati master plan and the spirit of CRDA's data-governance vision. It is <b>not</b> a Government of Andhra Pradesh or APCRDA product and is not endorsed by either. It deliberately does not use the official State Emblem (whose use is legally restricted) or any copyrighted master-plan artwork. The 3D model is an original interpretation of the publicly documented city layout. All datasets shown are illustrative samples and all headline figures are indicative, drawn from public reporting. © 2026 data.amaravati concept.
-  </div>
-</footer>
+</div>
 
 <!-- ONBOARDING / SSO MODAL -->
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="ovTitle" aria-hidden="true">
   <div class="modal" id="modal">
     <button class="x" id="ovClose" aria-label="Close dialog">×</button>
     <div id="modalBody"></div>
-  </div>
-</div>
-</main>
-
-<!-- ============ GOVERNED DATA CATALOGUE · ROUTE ============ -->
-<div id="catalogueRoute" class="route-view" role="region" aria-label="Governed Data Catalogue" hidden aria-hidden="true">
-  <div class="jrn-hero">
-    <div class="jrn-in">
-      <a href="#top" class="jrn-back">← Back to platform</a>
-      <div class="jrn-badge"><i></i>Data &amp; Interoperability · governed catalogue</div>
-      <h1>The governed <em>data catalogue.</em></h1>
-      <p>A pre-loaded sample of the datasets published across the city's domains. Every dataset carries a format, an update cadence, an owning department and a confidentiality class that decides who may request it.</p>
-    </div>
-  </div>
-  <div class="jrn-body">
-    <div class="catbar reveal" id="catbar" role="group" aria-label="Filter datasets"></div>
-    <div class="catalogue reveal" id="catalogue-grid"></div>
-  </div>
-</div>
-
-<!-- ============ ACCESS, TRUST & GOVERNANCE · ROUTE ============ -->
-<div id="accessRoute" class="route-view" role="region" aria-label="Access, Trust and Governance" hidden aria-hidden="true">
-  <div class="jrn-hero">
-    <div class="jrn-in">
-      <a href="#top" class="jrn-back">← Back to platform</a>
-      <div class="jrn-badge"><i></i>Trust, Security &amp; Governance</div>
-      <h1>Right data, <em>right authority.</em></h1>
-      <p>Every dataset is graded across four tiers, from Open to Confidential. Your authority — not your team — decides what you can reach, the controls applied, the consent required and the audit trail kept.</p>
-    </div>
-  </div>
-  <div class="jrn-body">
-    <div class="legend reveal" id="legend-grid"></div>
-    <div class="reveal" style="max-width:var(--maxw);margin:24px auto 0;padding:0 clamp(18px,5vw,56px);display:flex;flex-wrap:wrap;gap:10px">
-      <span class="cls" style="color:var(--saffron)"><i></i>Consent-bound · DPDP-aligned</span>
-      <span class="cls" style="color:var(--saffron)"><i></i>Encrypted in transit &amp; at rest</span>
-      <span class="cls" style="color:var(--saffron)"><i></i>Every request audit-logged</span>
-      <span class="cls" style="color:var(--saffron)"><i></i>CRDA-governed · steward &amp; DPO oversight</span>
-    </div>
-    <div class="sec-head reveal" style="margin-top:72px">
-      <span class="kicker">Personas · who the nexus serves</span>
-      <h2>One catalogue, <em>many entities.</em></h2>
-      <p>Sign-in maps every user to a persona. Your persona sets a default access envelope — what you can request instantly, what needs an agreement, and what is closed.</p>
-    </div>
-    <div class="personas reveal" id="personas-grid"></div>
-    <div class="sec-head reveal">
-      <span class="kicker">The access matrix</span>
-      <h2>Persona <em>×</em> confidentiality.</h2>
-      <p>How each persona meets each tier — instant, on agreement, or closed. The same matrix governs the catalogue and the request flow.</p>
-    </div>
-    <div class="matrix-wrap reveal"><table class="matrix" id="matrix"></table></div>
-  </div>
-</div>
-
-<!-- ============ DATA EXCHANGE HUB · SEPARATE JOURNEY ============ -->
-<div id="exchangeRoute" class="route-view" role="region" aria-label="Data Exchange Hub" hidden aria-hidden="true">
-  <div class="jrn-hero">
-    <div class="jrn-in">
-      <a href="#top" class="jrn-back" id="exReturn">← Back to platform</a>
-      <div class="jrn-badge"><i></i>Data Exchange Hub · governed by CRDA</div>
-      <h1>Government data, <em>exchanged under governance.</em></h1>
-      <p>The hard part of open data isn't publishing — it's the governed exchange of sensitive data <em>between</em> agencies. One place for every government entity to request and provide data, with <b>CRDA as the governing authority</b>: classifying data, approving sensitive and confidential exchanges, holding the register of agreements and auditing every transaction.</p>
-    </div>
-  </div>
-  <div class="jrn-body">
-    <div class="sec-head reveal">
-      <span class="kicker">The governed workflow</span>
-      <h2>From request to <em>provision.</em></h2>
-      <p>Six governed steps, with CRDA presiding over classification, approval and audit.</p>
-    </div>
-    <div class="exflow reveal" id="exflow"></div>
-
-    <div class="sec-head reveal" style="margin-top:68px">
-      <span class="kicker">Participating entities</span>
-      <h2>A network of <em>providers &amp; consumers.</em></h2>
-      <p>Departments, utilities and statutory bodies join the hub as data providers, consumers or both — with CRDA presiding over the network.</p>
-    </div>
-    <div class="entities reveal" id="entities-grid"></div>
-
-    <div class="sec-head reveal" style="margin-top:68px">
-      <span class="kicker">The exchange register</span>
-      <h2>Live inter-agency <em>agreements.</em></h2>
-      <p>Every government-to-government exchange, its confidentiality class and where it sits in CRDA governance — open, under review, on agreement, or declined.</p>
-    </div>
-    <div class="ledger-wrap reveal"><table class="ledger" id="ledger"></table></div>
-
-    <div class="sec-head reveal" style="margin-top:72px">
-      <span class="kicker">Stakeholder performance · weekly KPIs</span>
-      <h2>Every entity, <em>scored on its KPIs.</em></h2>
-      <p>Each participating entity is measured weekly against its data-exchange KPIs — on-time publishing, exchange-SLA fulfilment, feed freshness, response time and governance compliance — and given an overall score and grade. KPI performance is restricted: sign in as an entity stakeholder to see your own entity's weekly scorecard.</p>
-    </div>
-    <div class="kpi-wrap reveal" id="kpiPanel"></div>
-
-    <div class="jrn-foot reveal">
-      <a href="#" class="btn btn-primary" id="proposeBtn">Propose an exchange ↗</a>
-    </div>
-    <p class="jrn-note">data.amaravati is a concept — exchange agreements shown are illustrative.</p>
-  </div>
-</div>
-
-<!-- ============ DECISION COCKPIT · LEADERSHIP OVERSIGHT · ROUTE ============ -->
-<div id="cockpitRoute" class="route-view" role="region" aria-label="Decision Cockpit" hidden aria-hidden="true">
-  <div class="jrn-hero jrn-hero-lead">
-    <div class="jrn-in">
-      <a href="#top" class="jrn-back">← Back to platform</a>
-      <div class="jrn-badge"><i></i>Decision Cockpit · Leadership oversight</div>
-      <h1>Decisions, <em>governed by data.</em></h1>
-      <p>One cockpit for higher officials — a city-wide view of every government entity's performance, the insights that drive policy, and the signals that need a decision this week. Access is restricted to leadership.</p>
-    </div>
-  </div>
-  <div class="jrn-body">
-    <div class="kpi-wrap reveal" id="cockpitPanel"></div>
   </div>
 </div>
 
@@ -1347,35 +1299,29 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
 
 /* nav + progress */
-const nav=$("#nav"),prog=$("#prog");
-addEventListener("scroll",()=>{
-  const sc=scrollY;nav.classList.toggle("scrolled",sc>30);
-  const h=document.documentElement.scrollHeight-innerHeight;
-  prog.style.width=(h>0?(sc/h*100):0)+"%";
-},{passive:true});
+/* sidebar dashboard: no scroll-progress */
 
-/* ---------- multi-route journeys (catalogue · access · exchange) ---------- */
+/* ---------- sidebar dashboard: view switching ---------- */
 (function(){
-  const main=$("#main"), ROUTES=["catalogue","access","cockpit","exchange"];
+  const VIEWS=["overview","catalogue","access","exchange","cockpit"];
+  const TITLES={
+    overview:["Overview","One-stop governed data platform"],
+    catalogue:["Data Catalogue","Governed datasets you can request"],
+    access:["Access & Trust","Classification, personas and the access matrix"],
+    exchange:["Data Exchange Hub","Governed government-to-government exchange"],
+    cockpit:["Decision Cockpit","Leadership oversight & policy signals"]
+  };
   function render(){
-    const hash=(location.hash||"").replace(/^#\/?/,"");
-    const name=ROUTES.includes(hash)?hash:null;
-    ROUTES.forEach(r=>{const v=document.getElementById(r+"Route"); if(!v)return; const on=(r===name);
-      v.hidden=!on; v.setAttribute("aria-hidden",String(!on));
-      if(on)v.querySelectorAll(".reveal").forEach(e=>e.classList.add("in"));});
-    if(main)main.style.display=name?"none":"";
-    document.body.classList.toggle("routed",!!name);
-    document.querySelectorAll("[data-nav]").forEach(a=>a.classList.toggle("active",a.getAttribute("data-nav")===name));
-    if(name){
-      if(name==="exchange"&&typeof renderKpiPanel==="function")renderKpiPanel();
-      if(name==="cockpit"&&typeof renderCockpit==="function")renderCockpit();
-      window.scrollTo(0,0);
-    }else if(!location.hash||location.hash==="#"||location.hash==="#top"){
-      window.scrollTo(0,0);
-    }else{
-      const t=document.querySelector(location.hash);
-      if(t)requestAnimationFrame(()=>t.scrollIntoView({behavior:"smooth",block:"start"}));
-    }
+    let h=(location.hash||"").replace(/^#\/?/,"");
+    if(h==="top"||h==="")h="overview";
+    const name=VIEWS.includes(h)?h:"overview";
+    VIEWS.forEach(v=>{const el=document.getElementById("view-"+v); if(el)el.classList.toggle("on",v===name);});
+    document.querySelectorAll("[data-view]").forEach(a=>{const on=a.getAttribute("data-view")===name; a.classList.toggle("active",on); if(on)a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");});
+    const t=TITLES[name], tt=document.getElementById("topTitle"), ts=document.getElementById("topSub");
+    if(t&&tt){tt.textContent=t[0]; if(ts)ts.textContent=t[1];}
+    if(name==="exchange"&&typeof renderKpiPanel==="function")renderKpiPanel();
+    if(name==="cockpit"&&typeof renderCockpit==="function")renderCockpit();
+    const cv=document.querySelector(".canvas"); if(cv)cv.scrollTo({top:0,behavior:"auto"});
   }
   addEventListener("hashchange",render);
   render();
